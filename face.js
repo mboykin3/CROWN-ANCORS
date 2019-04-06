@@ -1,51 +1,33 @@
-var Face = require("./Face");
-
-class Die {
-    constructor(faces) {
-        this.faces = faces;
+class Face {
+    constructor(name, value, imageUrl) {
+        this._name = name;
+        this._value = value;
+        this._imageUrl = imageUrl;
+    }
+    set name(faceName) {
+        this._name = faceName | "Unknown";
     }
 
-static defaultNumberOfFaces() {
-    return 6;
-}
-set faces(dieFaces) {
-    if (Array.isArray(dieFaces)) {
-        for (var i = 0; i, dieFaces.length; i++) {
-            if (!(dieFaces[i] instanceof Face)) {    //validates that every die is a collection of the same die even with a new face
-                dieFaces[i] = new Face(i, i);
-            }
+    get name() {
+        return this._name;
+    }
+
+    set value(faceValue) {
+        if (isNaN(faceValue)) {
+            this._value = 0;
         }
-    }
-    else {
-        var dieFaces = [];
-
-        for (var i = 0; i < Die.defaultNumberOfFaces(); i++) {
-            dieFaces.push(new Face(i, i));
+        else {
+            this._value = faceValue;
         }
     }
 
-    this.faces = dieFaces;
-    this.rollDie();
-}
+    get value() {
+        return this._value;
+    }
 
-get faces() {
-    return this._faces;
-}
-
-rollDie() {
-
-    var upper_bound = this._faces.length - 1;
-    var lower_bound = 0;
-    var randomFaceIndex = Math.floor(Math.random() * (upper_bound - lower_bound);
-
-    this._activeFaceIndex = randomFaceIndex;
-}
-
-get ActiveFace() {
-    return this._faces[this._activeFaceIndex];
-}
-get numberOfFaces() {
-    return this._faces.length;
+    set imagUrl(newImageUrl) {
+        this._imageUrl = newImageUrl | "Unknown";
     }
 }
+
 module.exports = Die;
