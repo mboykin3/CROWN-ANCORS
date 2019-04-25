@@ -26,6 +26,7 @@ class Die {
 
         this.faces = dieFaces;
         this.rollDie();
+
     }
 
     get faces() {
